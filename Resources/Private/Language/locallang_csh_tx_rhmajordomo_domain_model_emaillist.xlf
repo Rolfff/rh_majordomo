@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-01-20T17:31:53Z" product-name="rh_majordomo">
+		<header/>
+		<body>
+			<trans-unit id="digest_name.description">
+				<source>digestName</source>
+			</trans-unit>
+			<trans-unit id="list_name.description">
+				<source>listName</source>
+			</trans-unit>
+			<trans-unit id="list_email_address.description">
+				<source>listEmailAddress</source>
+			</trans-unit>
+			<trans-unit id="email_moderator.description">
+				<source>emailModerator</source>
+			</trans-unit>
+			<trans-unit id="approve_passwd.description">
+				<source>approvePasswd</source>
+			</trans-unit>
+			<trans-unit id="majordomo_mail_box.description">
+				<source>majordomoMailBox</source>
+			</trans-unit>
+			<trans-unit id="sender.description">
+				<source>sender</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2020-01-20T17:31:53Z" product-name="rh_majordomo">
+		<header/>
+		<body>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist">
+				<source>Email List</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.digest_name">
+				<source>Digest Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.list_name">
+				<source>List Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.list_email_address">
+				<source>List Email Address</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.email_moderator">
+				<source>Email Moderator</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.approve_passwd">
+				<source>Approve Passwd</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.majordomo_mail_box">
+				<source>Majordomo Mail Box</source>
+			</trans-unit>
+			<trans-unit id="tx_rh_majordomo_feplugin.name">
+				<source>Majordomo FrontendPlugin</source>
+			</trans-unit>
+			<trans-unit id="tx_rh_majordomo_feplugin.description">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.sender">
+				<source>Sender</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

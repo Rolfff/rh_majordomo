@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xliff version="1.0">
+    <file product-name="rh_majordomo" source-language="en" date="2015-02-19T17:33:19Z" datatype="plaintext" original="locallang_be">
+        <body>
+            <trans-unit id="settings.sheetTitle">
+                <source>Options</source>
+            </trans-unit>
+            <trans-unit id="settings.multibleRecords">
+                <source>Select one or multiple maillists</source>
+            </trans-unit>
+            <trans-unit id="settings.sendWelcomeMessage">
+                <source>Sends greeting and farewell message</source>
+            </trans-unit>
+            <trans-unit id="settings.onlyFeusersEmail">
+                <source>Allow only the Email-Address from FE-User</source>
+            </trans-unit>
+            <trans-unit id="settings.sendAckMessageToModerator">
+                <source>Sends notification to moderator</source>
+            </trans-unit>
+            
+            
+        </body>
+    </file>
+</xliff>

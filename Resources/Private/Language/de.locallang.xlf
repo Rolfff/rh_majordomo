@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file product-name="rh_majordomo" target-language="de" source-language="en" date="2015-02-19T17:33:19Z" datatype="plaintext" original="locallang_be">
+		<header/>
+		<body>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist">
+				<source>Email List</source>
+                                <target>Email Liste</target>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.digest_name">
+				<source>Digest Name</source>
+                                <target>Digest Name</target>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.list_name">
+				<source>List Name</source>
+                                <target>List Name</target>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.sender">
+				<source>Sender</source>
+                                <target>Sender</target>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.email_moderator">
+				<source>Email Moderator</source>
+                                <target>Email Moderator</target>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.approve_passwd">
+				<source>Approve Passwd</source>
+                                <target>Approve Passwd</target>
+			</trans-unit>
+                        
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.lableMail">
+				<source>E-Mail</source>
+                                <target>E-Mail</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.lableList">
+				<source>Choose an e-mail list</source>
+                                <target>Wähle einen E-mail-Verteiler</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.select.default">
+				<source>--Please choose--</source>
+                                <target>--Bitte auswählen--</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.lableComand">
+				<source>What would you like to do with the e-mail list</source>
+                                <target>Was möchtest du mit dem E-mail-Verteiler machen</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.select.subscribe">
+				<source>subscribe me</source>
+                                <target>mich eintragen</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.select.unsubscribe">
+				<source>unsubscribe me</source>
+                                <target>mich austragen</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.outtro.dataprotectionnoitceHeader">
+				<source>Data protection notice: </source>
+                                <target>Datenschutzhinweis: </target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.outtro.dataprotectionnoitce">
+				<source> By submitting this form you agree that your e-mail address &quot;%s&quot; will be sent unencrypted as the content of an e-mail to the mail daemon. Your email address will be stored there until you unsubscribe from the mailing list.</source>
+                                <target> Mit dem Abschicken dieses Formulars bist du damit einverstanden, dass deine E-mail-Adresse &quot;%s&quot; unverschlüsselt als Inhalt einer E-Mail an den Mail-Dämon geschickt wird. Deine E-Mail-Adresse wird dort solange gespeichert, bis du dich von dem E-Mail-Verteiler abmeldest.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.outtro.moderatorack">
+				<source>The email list moderator receives a note of this process.</source>
+                                <target>Der Email-Verteiler-Moderator bekommt eine Notiz dieses Vorgangs.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.submit">
+				<source>submit</source>
+                                <target>Absenden</target>
+			</trans-unit>
+                        
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.intro.feusermail">
+				<source>You can subscribe or unsubscribe to mailing lists with the e-mail address "%s".</source>
+                                <target>Du kannst dich mit der E-mail-Adresse "%s" in Verteilern an- oder abmelden.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.intro.anymail">
+				<source>You can subscribe or unsubscribe to mailing lists with an e-mail address.</source>
+                                <target>Du kannst dich mit einer E-mail-Adresse in Verteilern an- oder abmelden.</target>
+			</trans-unit>
+                        
+                        
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.test">
+				<source>Test </source>
+                                <target>Test.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.noListFound">
+				<source>No mail list was found. Please select one.</source>
+                                <target>Es wurde kein E-mail-Verteiler gefunden. Bitte wähle einen aus.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.failedData">
+				<source>An error has occurred during the transmission of the data. Please try again.</source>
+                                <target>Es ist ein Fehler bei der Übermittlung der Daten aufgetreten. Bitte versuchen Sie es erneut.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.default">
+				<source>Your instruction was successfully sent by email.</source>
+                                <target>Ihre Anweisung wurde als Email erfolgreich versendet.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.welcome">
+				<source>You have been successfully added to the email list "%s".</source>
+                                <target>Sie wurden erfolgreich in den Email-Verteiler "%s" aufgenommen.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.bye">
+				<source>You have been successfully removed from the mailing list "%s".</source>
+                                <target>Sie wurden erfolgreich aus dem Email-Verteiler "%s" entfernt.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendfailed">
+				<source>Unfortunately you could not be successfully registered in or removed from the email list "%s".</source>
+                                <target>Sie konnten leider nicht erfolgreich in den Email-Verteiler "%s" eingetragen oder von ihm gelöscht werden.</target>
+			</trans-unit>
+                        
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.mail.subject.welcome">
+				<source>Welcome to the "%s" e-mail list</source>
+                                <target>Willkommen auf dem "%s" E-mail-Verteiler</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.mail.subject.bye">
+				<source>Goodbye from the "%s" e-mail list</source>
+                                <target>Auf wiedersehen von dem "%s" E-mail-Verteiler</target>
+			</trans-unit>
+                        
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.gredings">
+				<source>Hi %s %s,</source>
+                                <target>Hallo %s %s,</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.subscribe">
+				<source>welcome to the "%s" e-mail distribution list. You can write to the address %s with all subscribers. If you have any questions or if you did not want to be on this mailing list, write an e-mail to %s.</source>
+                                <target>willkommen auf dem "%s" E-mail-Verteiler. Du kannst über die Adresse %s mit allen Abbonenten schreiben. Bei Fragen oder wenn du garnicht auf diesen Verteiler wolltest, schreibe an %s eine E-mail.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.unsubscribe">
+				<source>you have been deleted from the "%s" e-mail list.</source>
+                                <target>du wurdest von dem E-mail-Verteiler "%s" gelöscht.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.ending">
+				<source>Many greetings</source>
+                                <target>Viele Grüße</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
