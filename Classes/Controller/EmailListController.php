@@ -1,6 +1,7 @@
 <?php
 namespace Rh\RhMajordomo\Controller;
 
+use TYPO3\CMS\Extbase\Annotation\Inject;
 
 /***
  *
@@ -85,7 +86,7 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         } 
         //Get chosen Mail-List
         $emailList = $this->emailListRepository->findByUid($emailListID[0]);
-        
+        #TODO entfernen
         \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($commandmail); 
         
         if ($command[0] == null || $commandmail == null || $emailListID[0] == null){
@@ -112,26 +113,26 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
             {
                 case 'subscribe':
                 $mail->setSubject("subscribe ".$emailList->getDigestName());
-                $mail->setBody("approve ".$emailList->getApprovePasswd()." subscribe ".$emailList->getDigestName()." ".$commandmail[0]);
+                $mail->setBody()->text("approve ".$emailList->getApprovePasswd()." subscribe ".$emailList->getDigestName()." ".$commandmail[0]);
                 
                 break;
                 case 'unsubscribe':
                 $mail->setSubject("unsubscribe from ".$emailList->getDigestName());
-                $mail->setBody("approve ".$emailList->getApprovePasswd()." unsubscribe ".$emailList->getDigestName()." ".$commandmail[0]);
+                $mail->setBody()->text("approve ".$emailList->getApprovePasswd()." unsubscribe ".$emailList->getDigestName()." ".$commandmail[0]);
                 
                 break;
                 case 'who':
                 $mail->setSubject("member from ".$emailList->getDigestName());
-                $mail->setBody("approve ".$emailList->getApprovePasswd()." who ".$emailList->getDigestName());
+                $mail->setBody()->text("approve ".$emailList->getApprovePasswd()." who ".$emailList->getDigestName());
                 break;
                 case 'liste':
                 $mail->setSubject("list ");
-                $mail->setBody("config ".$emailList->getDigestName()." ".$emailList->getApprovePasswd());
+                $mail->setBody()->text("config ".$emailList->getDigestName()." ".$emailList->getApprovePasswd());
                     
                 break;
                 case 'newconf':
                 $mail->setSubject("newconfig ");
-                $mail->setBody("newconfig ".$emailList->getDigestName()." ".$emailList->getApprovePasswd()." \n \n $config");
+                $mail->setBody()->text("newconfig ".$emailList->getDigestName()." ".$emailList->getApprovePasswd()." \n \n $config");
                 break;
             } //switch
             //$mail->setBody('Here is the message itself');
@@ -147,10 +148,11 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
              * Or am I too stupid?
              * Alternativ the php mail()-function is here used.
              */
-            $header = 'From: '.$mail->getFrom().'' . "\r\n".'Reply-To: '.$mail->getReturnPath().'' . "\r\n" ;
+            
+            $header = 'From: '.$mail->getFrom()[0]->getAddress().'' . "\r\n".'Reply-To: '.$mail->getReturnPath()->getAddress().'' . "\r\n" ;
             if (mail($emailList->getMajordomoMailBox(), $mail->getSubject(), $mail->getBody() , $header)){
-           // $mail->send();
-           // if ($mail->isSent()){
+            //$mail->send();
+            //if ($mail->isSent()){
                 switch ($command[0])
                 {
                     case 'subscribe':

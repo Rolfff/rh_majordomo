@@ -140,7 +140,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'nospace,email'
+                'eval' => 'nospace,email,required'
             ]
         ],
         'email_moderator' => [
