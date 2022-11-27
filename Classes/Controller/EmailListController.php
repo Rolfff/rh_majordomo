@@ -148,11 +148,11 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
              * Or am I too stupid?
              * Alternativ the php mail()-function is here used.
              */
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($emailList->getMajordomoMailBox()); 
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($mail->getSubject());
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($mail->getBody());
+            
+            #\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('tesz');
+
             $header = 'From: '.$mail->getFrom()[0]->getAddress().'' . "\r\n".'Reply-To: '.$mail->getReturnPath()->getAddress().'' . "\r\n" ;
-            if (mail($emailList->getMajordomoMailBox(), $mail->getSubject(), $mail->getBody() , $header)){
+            if (mail($emailList->getMajordomoMailBox(), $mail->getSubject(), $mail->getBody()->getBody(), $header)){
             //$mail->send();
             //if ($mail->isSent()){
                 switch ($command[0])
