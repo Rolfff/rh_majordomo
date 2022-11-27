@@ -84,6 +84,12 @@
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.bye">
 				<source>You have been successfully removed from the mailing list &quot;%s&quot;.</source>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.moderator.welcome">
+				<source>The user &quot;%s&quot; have been successfully added to the email list &quot;%s&quot;.</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.moderator.bye">
+				<source>The user &quot;%s&quot; have been successfully removed from the mailing list &quot;%s&quot;.</source>
+			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendfailed">
 				<source>Unfortunately you could not be successfully registered in the email list.</source>
 			</trans-unit>
@@ -102,7 +108,9 @@
 
 
 
-
+<trans-unit id="tx_rhmajordomo_domain_model_emaillist.mail.subject.admin">
+				<source>Note to "%s" e-mail list</source>
+			</trans-unit>
 
 
                         
@@ -117,7 +125,7 @@
 				<source>Hi %s %s,</source>
 			</trans-unit>
             <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.subscribe">
-				<source>welcome to the "%s" e-mail distribution list. You can write to the address %s with all subscribers. If you have any questions or if you did not want to be on this mailing list, write an e-mail to %s.</source>
+				<source>welcome to the "%s" e-mail distribution list. You can write to the address %s with all subscribers. If you have any questions, write an e-mail to: %s.</source>
 			</trans-unit>
             <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.unsubscribe">
 				<source>you have been deleted from the "%s" e-mail list.</source>
