@@ -230,27 +230,20 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         
         //Get chosen Mail-List
         $emailList = $this->emailListRepository->findByUid($emailListID);
-        
-        
-        
-            
+
         $variables = array('emailList' => $emailList, 'user' => $user);
             
         $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
-           
-            
+
         $mail->setFrom('no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1]);
-            
-            
+
             if(trim($emailList->getEmailModerator()) != ""){
                 $mail->setReturnPath($emailList->getEmailModerator());
             } else {
                 //Set return Mail adress to no-replay@your-domain.com 
                 $mail->setReturnPath('no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1]);
             }
-            
-            
-            
+
             $mail->setTo($emailList->getMajordomoMailBox());
             
             switch ($command)
@@ -304,11 +297,15 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                 {
                     case 'subscribe':
                         if($sendWelcomeMessage){
+                            $content = 'tx_rhmajordomo_domain_model_emaillist.email.content.subscribe';
+                            if($emailList->isOneWayList()){
+                                $content = 'tx_rhmajordomo_domain_model_emaillist.email.content.subscribeOneWay';
+                            }
                             $this->sendTemplateEmail(
                                     $commandmail, 
                                     $mail->getFrom()[0]->getAddress(), 
                                     $this->translate('tx_rhmajordomo_domain_model_emaillist.mail.subject.welcome',array($emailList->getListName())), 
-                                    $this->translate('tx_rhmajordomo_domain_model_emaillist.email.content.subscribe', array($emailList->getListName(),$emailList->getListEmailAddress(), $emailList->getEmailModerator())), 
+                                    $this->translate($content, array($emailList->getListName(),$emailList->getListEmailAddress(), $emailList->getEmailModerator())), 
                                     $variables);
                         }
                         if($sendAckMessageToModerator && trim($emailList->getEmailModerator()) != ""){

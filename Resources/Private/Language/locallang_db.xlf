@@ -33,6 +33,9 @@
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.sender">
 				<source>Sender</source>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.is_one_way_list">
+				<source>Only moderators can send emails.</source>
+			</trans-unit>
                         
                         <trans-unit id="tx_rhmajordomo_domain_model_emailverification.emaillist_id">
 				<source>Emaillist ID</source>

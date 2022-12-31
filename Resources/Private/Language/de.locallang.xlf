@@ -174,13 +174,17 @@
                                 <target>Bitte bestätigen Sie Ihre E-Mail Adresse</target>
 			</trans-unit>
                         
-            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.gredings">
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.gredings">
 				<source>Hi %s %s,</source>
                                 <target>Hallo %s %s,</target>
 			</trans-unit>
-            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.subscribe">
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.subscribe">
 				<source>welcome to the "%s" e-mail distribution list. You can write to the address %s with all subscribers. If you have any questions, write an e-mail to: %s.</source>
                                 <target>willkommen auf dem "%s" E-mail-Verteiler. Du kannst über die Adresse %s mit allen Abbonenten schreiben. Bei Fragen, schreibe eine E-mail an: %s</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.subscribeOneWay">
+				<source>welcome to the "%s" e-mail distribution list. You cannot send e-mails to the %s address. This is only a distribution list for receiving e-mails. If you have any questions, write an e-mail to: %s.</source>
+                                <target>willkommen auf dem "%s" E-mail-Verteiler. Du kannst an die Adresse %s keine E-mails versenden. Dies ist nur ein Verteiler zum E-mails empfangen. Bei Fragen, schreibe eine E-mail an: %s</target>
 			</trans-unit>
                         <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.unsubscribe">
 				<source>you have been deleted from the "%s" e-mail list.</source>

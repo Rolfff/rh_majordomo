@@ -20,10 +20,10 @@ return [
         'iconfile' => 'EXT:rh_majordomo/Resources/Public/Icons/tx_rhmajordomo_domain_model_emaillist.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, digest_name, list_name, list_email_address, email_moderator, approve_passwd, majordomo_mail_box',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, digest_name, list_name, list_email_address, email_moderator, approve_passwd, majordomo_mail_box, is_one_way_list',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, digest_name, list_name, list_email_address, email_moderator, approve_passwd, majordomo_mail_box, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, digest_name, list_name, list_email_address, email_moderator, approve_passwd, majordomo_mail_box, is_one_way_list, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -170,6 +170,20 @@ return [
                 'eval' => 'nospace,email,required'
             ]
         ],
-    
+        'is_one_way_list' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:rh_majordomo/Resources/Private/Language/locallang_db.xlf:tx_rhmajordomo_domain_model_emaillist.is_one_way_list',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                        'invertStateDisplay' => false
+                    ]
+                ],
+            ],
+        ],
     ],
 ];
