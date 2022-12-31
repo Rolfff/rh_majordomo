@@ -48,7 +48,7 @@
                         </f:if>
                         </f:then>
                         <f:else>
-                             <f:translate key="tx_rhmajordomo_domain_model_emaillist.message.verificationlink" />
+                             <f:translate key="tx_rhmajordomo_domain_model_emaillist.message.verificationlink" arguments="{0: '{settings.lifetimeEmailVerification}'}"/>
                             <f:translate key="tx_rhmajordomo_domain_model_emaillist.outtro.dataprotectionnoitcewithouteamil" /><br />
                         <f:if condition="{settings.sendAckMessageToModerator}">
                             <f:then>
@@ -59,7 +59,7 @@
                     </f:if>
                     
                          
-                        <f:form.submit value="{f:translate(key: 'tx_rhmajordomo_domain_model_emaillist.submit')}" />
+                        <f:form.submit value="{f:translate(key: 'tx_rhmajordomo_domain_model_emaillist.button.submit')}" />
                 </f:form>
                 
                 

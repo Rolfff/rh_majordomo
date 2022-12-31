@@ -3,7 +3,12 @@
 	<file product-name="rh_majordomo" target-language="de" source-language="en" date="2015-02-19T17:33:19Z" datatype="plaintext" original="locallang_be">
 		<header/>
 		<body>
-			<trans-unit id="tx_rhmajordomo_domain_model_emaillist">
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.datetimeformat">
+                            <!--see https://www.php.net/manual/en/datetime.format.php -->
+				<source>Y-m-d H:i</source>
+                                <target>d.m.Y H:i</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist">
 				<source>Email List</source>
                                 <target>Email Liste</target>
 			</trans-unit>
@@ -68,11 +73,14 @@
 				<source>The email list moderator receives a note of this process.</source>
                                 <target>Der Email-Verteiler-Moderator bekommt eine Notiz dieses Vorgangs.</target>
 			</trans-unit>
-                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.submit">
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.button.submit">
 				<source>submit</source>
                                 <target>Absenden</target>
 			</trans-unit>
-                        
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.button.next">
+				<source>Enter next email</source>
+                                <target>Nächste E-Mail eingeben</target>
+			</trans-unit>
                         <trans-unit id="tx_rhmajordomo_domain_model_emaillist.intro.feusermail">
 				<source>You can subscribe or unsubscribe to mailing lists with the e-mail address "%s".</source>
                                 <target>Du kannst dich mit der E-mail-Adresse "%s" in Verteilern an- oder abmelden.</target>
@@ -91,6 +99,10 @@
 				<source>No mail list was found. Please select one.</source>
                                 <target>Es wurde kein E-mail-Verteiler gefunden. Bitte wähle einen aus.</target>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.noValidMail">
+				<source>Please enter a valid email address.</source>
+                                <target>Bitte geben Sie eine gültige E-Mail Adresse ein.</target>
+			</trans-unit>
                         <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.failedData">
 				<source>An error has occurred during the transmission of the data. Please try again.</source>
                                 <target>Es ist ein Fehler bei der Übermittlung der Daten aufgetreten. Bitte versuchen Sie es erneut.</target>
@@ -107,6 +119,10 @@
 				<source>You have been successfully removed from the mailing list "%s".</source>
                                 <target>Sie wurden erfolgreich aus dem Email-Verteiler "%s" entfernt.</target>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.validMail">
+				<source>Please check your email inbox and confirm your email address until %s.</source>
+                                <target>Bitte überprüfen Sie Ihren E-Mail-Posteingang und bestätigen Sie Ihre E-Mail-Adresse bis zum %s.</target>
+			</trans-unit>
                         <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.moderator.welcome">
 				<source>The user "%s" have been successfully added to the email list "%s".</source>
                                 <target>Die Email "%s" wurden erfolgreich in den Email-Verteiler "%s" aufgenommen.</target>
@@ -119,6 +135,10 @@
 				<source>Unfortunately you could not be successfully registered in or removed from the email list "%s".</source>
                                 <target>Sie konnten leider nicht erfolgreich in den Email-Verteiler "%s" eingetragen oder von ihm gelöscht werden.</target>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.valaidate.fail">
+				<source>The link you used is invalid. Please try again. </source>
+                                <target>Der von Ihnen verwendete Link ist ungültig. Bitte versuchen Sie es erneut.</target>
+			</trans-unit>
 
 
 
@@ -127,8 +147,8 @@
 				<target>Sie sind nicht eingeloggt. Bitte loggen Sie sich zuerst ein.</target>
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.verificationlink">
-				<source>After submitting this form you will receive an email with a verification link. Please confirm your email address by clicking on the link. The link is valid for 24 hours. It may take up to 10 minutes before you receive an email. Please also check your spam folder if necessary. </source>
-                <target>Nach dem Absenden dieses Formulars erhalten Sie eine E-Mail mit einem Verifizierungslink. Bitte bestätigen Sie Ihre E-Mail-Adresse, indem Sie auf den Link klicken. Der Link ist 24 Stunden lang gültig. Es kann bis zu 10 Minuten dauern, bis Sie eine E-Mail erhalten. Bitte überprüfen Sie ggf. auch Ihren Spam-Ordner. </target>
+				<source>After submitting this form you will receive an email with a verification link. Please confirm your email address by clicking on the link. The link is valid for %s hours. It may take up to 10 minutes before you receive an email. Please also check your spam folder if necessary. </source>
+                <target>Nach dem Absenden dieses Formulars erhalten Sie eine E-Mail mit einem Verifizierungslink. Bitte bestätigen Sie Ihre E-Mail-Adresse, indem Sie auf den Link klicken. Der Link ist %s Stunden lang gültig. Es kann bis zu 10 Minuten dauern, bis Sie eine E-Mail erhalten. Bitte überprüfen Sie ggf. auch Ihren Spam-Ordner. </target>
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.verificationlinkmoderatorack">
 				<source>After the successful email verification, the email list administrator will be informed about the process.</source>
@@ -149,6 +169,10 @@
 				<source>Goodbye from the "%s" e-mail list</source>
                                 <target>Auf wiedersehen von dem "%s" E-mail-Verteiler</target>
 			</trans-unit>
+            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.mail.subject.validate">
+				<source>Please confirm your email address</source>
+                                <target>Bitte bestätigen Sie Ihre E-Mail Adresse</target>
+			</trans-unit>
                         
             <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.gredings">
 				<source>Hi %s %s,</source>
@@ -161,6 +185,14 @@
                         <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.unsubscribe">
 				<source>you have been deleted from the "%s" e-mail list.</source>
                                 <target>du wurdest von dem E-mail-Verteiler "%s" gelöscht.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.validate.subscribe">
+				<source>We are pleased that you are interested in joining the %s email distribution list. Please confirm your interest by clicking on the following link:<br /><br /> %s <br /><br />The link is valid until %s. <br />If you are not interested, you can ignore or delete this email.</source>
+                                <target>Wir freuen uns, dass Sie an der Aufnahme in den E-Mail-Verteiler %s interessiert sind. Bitte bestätigen Sie Ihr Interesse, indem Sie auf den folgenden Link klicken:<br /><br /> %s <br /><br />Der Link ist gültig bis %s. <br />Wenn Sie nicht interessiert sind, können Sie diese E-Mail ignorieren oder löschen.</target>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.validate.unsubscribe">
+				<source>We are very sorry that you wish to leave the %s email distribution list. Please confirm your wish by clicking on the following link:<br /><br /> %s <br /><br />The link is valid until %s. <br />If you do not wish to leave the email distribution list, you can ignore or delete this email.</source>
+                                <target>Wir bedauern sehr, dass Sie den E-Mail-Verteiler %s verlassen möchten. Bitte bestätigen Sie Ihren Wunsch, indem Sie auf den folgenden Link klicken:<br /><br /> %s <br /><br />Der Link ist gültig bis %s. <br />Wenn Sie die E-Mail-Verteilerliste nicht verlassen möchten, können Sie diese E-Mail ignorieren oder löschen.</target>
 			</trans-unit>
                         <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.ending">
 				<source>Many greetings</source>

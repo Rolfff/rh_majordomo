@@ -3,6 +3,10 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2020-01-20T17:31:53Z" product-name="rh_majordomo">
 		<header/>
 		<body>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.datetimeformat">
+                            <!--see https://www.php.net/manual/en/datetime.format.php -->
+				<source>Y-m-d H:i:s</source>
+			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist">
 				<source>Email List</source>
 			</trans-unit>
@@ -57,8 +61,11 @@
             <trans-unit id="tx_rhmajordomo_domain_model_emaillist.outtro.moderatorack">
 				<source>The email list moderator receives a note of this process.</source>
 			</trans-unit>
-			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.submit">
+			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.button.submit">
 				<source>submit</source>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.button.next">
+				<source>Enter next email</source>
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.intro.feusermail">
 				<source>You can subscribe or unsubscribe to mailing lists with the e-mail address &quot;%s&quot;.</source>
@@ -75,8 +82,14 @@
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.failedData">
 				<source>An error has occurred during the transmission of the data. Please try again.</source>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.noValidMail">
+				<source>Please enter a valid email address.</source>
+			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.default">
 				<source>Your instruction was successfully sent by email.</source>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.validMail">
+				<source>Please check your email inbox and confirm your email address until %s.</source>
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.welcome">
 				<source>You have been successfully added to the email list &quot;%s&quot;.</source>
@@ -93,13 +106,16 @@
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.sendfailed">
 				<source>Unfortunately you could not be successfully registered in the email list.</source>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.valaidate.fail">
+				<source>The link you used is invalid. Please try again. </source>
+			</trans-unit>
 
 
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.notloggedin">
 				<source>You are not logged in. Please log in first.</source>
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.verificationlink">
-				<source>After submitting this form you will receive an email with a verification link. Please confirm your email address by clicking on the link. The link is valid for 24 hours. It may take up to 10 minutes before you receive an email. Please also check your spam folder if necessary. </source>
+				<source>After submitting this form you will receive an email with a verification link. Please confirm your email address by clicking on the link. The link is valid for %s hours. It may take up to 10 minutes before you receive an email. Please also check your spam folder if necessary. </source>
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.message.verificationlinkmoderatorack">
 				<source>After the successful email verification, the email list administrator will be informed about the process.</source>
@@ -120,6 +136,9 @@
             <trans-unit id="tx_rhmajordomo_domain_model_emaillist.mail.subject.bye">
 				<source>Goodbye from the "%s" e-mail list</source>
 			</trans-unit>
+            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.mail.subject.validate">
+				<source>Please confirm your email address</source>
+			</trans-unit>
                         
             <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.gredings">
 				<source>Hi %s %s,</source>
@@ -129,6 +148,12 @@
 			</trans-unit>
             <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.unsubscribe">
 				<source>you have been deleted from the "%s" e-mail list.</source>
+			</trans-unit>
+            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.validate.subscribe">
+				<source>We are pleased that you are interested in joining the %s email distribution list. Please confirm your interest by clicking on the following link:<br /><br /> %s <br /><br />The link is valid until %s. <br />If you are not interested, you can ignore or delete this email.</source>
+			</trans-unit>
+            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.content.validate.unsubscribe">
+				<source>We are very sorry that you wish to leave the %s email distribution list. Please confirm your wish by clicking on the following link:<br /><br /> %s <br /><br />The link is valid until %s. <br />If you do not wish to leave the email distribution list, you can ignore or delete this email.</source>
 			</trans-unit>
            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.email.ending">
 				<source>Many greetings</source>
