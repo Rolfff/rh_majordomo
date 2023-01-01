@@ -73,7 +73,7 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $this->emailListRepository->setDefaultQuerySettings($querySettings); 
         
         if (trim($this->settings['lifetimeEmailVerification']) == ''){
-            $this->settings['lifetimeEmailVerification'] = 1;
+            $this->settings['lifetimeEmailVerification'] = 24;
         }
         $this->linkValidDateTime = date(
                 $this->translate('tx_rhmajordomo_domain_model_emaillist.datetimeformat'), 
