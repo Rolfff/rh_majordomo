@@ -79,8 +79,9 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                 $this->translate('tx_rhmajordomo_domain_model_emaillist.datetimeformat'), 
                 strtotime('+'.(int)$this->settings['lifetimeEmailVerification'].' hours')
                 );
+        
         $this->emailVerificationRepository->deleteOlderThan(date(
-                $this->translate('tx_rhmajordomo_domain_model_emaillist.datetimeformat'), 
+                'U', 
                 strtotime('-'.(int)$this->settings['lifetimeEmailVerification'].' hours')
                 ));
     }
