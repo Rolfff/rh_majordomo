@@ -9,11 +9,11 @@ call_user_func(
             'Rh.RhMajordomo',
             'Feplugin',
             [
-                'EmailList' => 'list, post'
+                'EmailList' => 'list, post, validate'
             ],
             // non-cacheable actions
             [
-                'EmailList' => 'list, post'
+                'EmailList' => 'list, post, validate'
             ]
         );
 

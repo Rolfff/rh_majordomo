@@ -8,6 +8,10 @@ plugin.tx_rhmajordomo_feplugin {
         # cat=plugin.tx_rhmajordomo_feplugin/file; type=string; label=Path to template layouts (FE)
         layoutRootPath = EXT:rh_majordomo/Resources/Private/Layouts/
     }
+    settings {
+        # cat=plugin.tx_rhmajordomo_feplugin//a; type=integer; label=lifetime of valid links in hours
+        lifetimeEmailVerification = 24
+    }
     persistence {
         # cat=plugin.tx_rhmajordomo_feplugin//a; type=string; label=Default storage PID
         storagePid =

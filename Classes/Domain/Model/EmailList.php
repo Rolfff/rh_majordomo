@@ -59,6 +59,15 @@ class EmailList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $majordomoMailBox = '';
+    
+    /**
+     * isOneWayList
+     * 
+     * @var bool
+     */
+    protected $isOneWayList = '';
+    
+    
 
     /**
      * Returns the digestName
@@ -184,5 +193,35 @@ class EmailList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setListEmailAddress($listEmailAddress)
     {
         $this->listEmailAddress = $listEmailAddress;
+    }
+    
+    /**
+     * Sets the isOneWayList
+     * 
+     * @param bool $isOneWayList
+     * @return void
+     */
+    public function setIsOneWayList($isOneWayList)
+    {
+        $this->isOneWayList = $isOneWayList;
+    }
+
+    /**
+     * Returns the isOneWayList
+     * 
+     * @return bool $isOneWayList
+     */
+    public function getIsOneWayList()
+    {
+        return $this->isOneWayList;
+    }
+    /**
+     * Returns the isOneWayList
+     * 
+     * @return bool $isOneWayList
+     */
+    public function isOneWayList()
+    {
+        return $this->isOneWayList;
     }
 }

@@ -15,6 +15,6 @@ call_user_func(
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_rhmajordomo_domain_model_emaillist', 'EXT:rh_majordomo/Resources/Private/Language/locallang_csh_tx_rhmajordomo_domain_model_emaillist.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_rhmajordomo_domain_model_emaillist');
-
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_rhmajordomo_domain_model_emaillist', 'EXT:rh_majordomo/Resources/Private/Language/tx_rhmajordomo_domain_model_emailverification.xlf');
     }
 );

@@ -2,6 +2,11 @@
     "name": "rh/rh-majordomo",
     "type": "typo3-cms-extension",
     "description": "It allows to add a FE-Users himself to an Majordomo Email-List.",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "majordomo"
+    ],
     "authors": [
         {
             "name": "Rolf Huesmann",
@@ -9,7 +14,7 @@
         }
     ],
     "require": {
-        "typo3/minimal": "^9.5"
+        "typo3/cms-core": "^10.0"
     },
     "autoload": {
         "psr-4": {
@@ -21,8 +26,16 @@
             "Rh\\RhMajordomo\\Tests\\": "Tests"
         }
     },
+    "support": {
+      "issues": "https://github.com/Rolfff/rh_majordomo/issues"
+   },
     "replace": {
         "rh/rh-majordomo": "self.version",
         "typo3-ter/rh-majordomo": "self.version"
+    },
+     "extra": {
+        "typo3/cms": {
+            "extension-key": "rh_majordomo"
+        }
     }
 }

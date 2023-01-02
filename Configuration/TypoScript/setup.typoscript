@@ -10,6 +10,7 @@ plugin.tx_rhmajordomo_feplugin {
     }
     settings{
         templateRootPaths = {$plugin.tx_rhmajordomo_feplugin.view.templateRootPath}
+        lifetimeEmailVerification = {$plugin.tx_rhmajordomo_feplugin.settings.lifetimeEmailVerification}
     }
     persistence {
         storagePid = {$plugin.tx_rhmajordomo_feplugin.persistence.storagePid}
@@ -54,6 +55,14 @@ plugin.tx_rhmajordomo._CSS_DEFAULT_STYLE (
 
     .typo3-messages .message-error {
         color:red;
+    }
+
+    .typo3-messages .message-warning {
+        color:yellow;
+    }
+
+    .typo3-messages .message-info {
+        color:blue;
     }
 
     .typo3-messages .message-ok {

@@ -1,6 +1,12 @@
 <?php
 namespace Rh\RhMajordomo\Controller;
 
+use Rh\RhMajordomo\Domain\Model\EmailVerification;
+use Rh\RhMajordomo\Domain\Repository\EmailVerificationRepository;
+use TYPO3\CMS\Extbase\Annotation\Inject;
+use Symfony\Component\Mime\Address;
+use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /***
  *
@@ -31,18 +37,53 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
      *
      * @param \Rh\RhMajordomo\Domain\Repository\EmailListRepository $emailListRepository
      */
-    public function injectNewsRepository(\Rh\RhMajordomo\Domain\Repository\EmailListRepository $emailListRepository)
+    public function injectEmailListRepository(\Rh\RhMajordomo\Domain\Repository\EmailListRepository $emailListRepository)
     {
         $this->emailListRepository = $emailListRepository;
     }
     
+    /**
+     * emailVerificationRepository
+     * 
+     * @var \Rh\RhMajordomo\Domain\Repository\EmailVerificationRepository
+     * @inject
+     */
+    protected $emailVerificationRepository = null;
+    
+    /**
+     * Inject a maillistVerification repository to enable DI
+     *
+     * @param \Rh\RhMajordomo\Domain\Repository\EmailVerificationRepository $emailVerificationRepository
+     */
+    public function injectEmailVerificationRepository(\Rh\RhMajordomo\Domain\Repository\EmailVerificationRepository $emailVerificationRepository)
+    {
+        $this->emailVerificationRepository = $emailVerificationRepository;
+    }
+    
     public function initializeAction()
     {
+        $objectManager = GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+        //$this->emailListRepository = $objectManager->get(EmailListRepository::class);
+        $this->emailVerificationRepository = $objectManager->get(EmailVerificationRepository::class);
+        
         //Setting RespectStoragePage 
         $querySettings = $this->emailListRepository->createQuery()->getQuerySettings();
         //$querySettings->setStoragePageIds(array($GLOBALS["TSFE"]->id));
         $querySettings->setRespectStoragePage(false);
-        $this->emailListRepository->setDefaultQuerySettings($querySettings);
+        $this->emailListRepository->setDefaultQuerySettings($querySettings); 
+        
+        if (trim($this->settings['lifetimeEmailVerification']) == ''){
+            $this->settings['lifetimeEmailVerification'] = 24;
+        }
+        $this->linkValidDateTime = date(
+                $this->translate('tx_rhmajordomo_domain_model_emaillist.datetimeformat'), 
+                strtotime('+'.(int)$this->settings['lifetimeEmailVerification'].' hours')
+                );
+        
+        $this->emailVerificationRepository->deleteOlderThan(date(
+                'U', 
+                strtotime('-'.(int)$this->settings['lifetimeEmailVerification'].' hours')
+                ));
     }
     
     
@@ -62,8 +103,7 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $this->view->assign('emailLists', $emailLists);
         $this->view->assign('feuser', $user);
     }
-    
-    
+        
     
     /**
      * action post
@@ -80,58 +120,157 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $onlyFeusersEmail = (bool) ($this->settings['onlyFeusersEmail'] ?? false);
         $sendAckMessageToModerator = (bool) ($this->settings['sendAckMessageToModerator'] ?? false);
         
-        if($onlyFeusersEmail){
-            $commandmail[0] = $user['email'];
-        } 
         //Get chosen Mail-List
         $emailList = $this->emailListRepository->findByUid($emailListID[0]);
         
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($commandmail); 
-        
-        if ($command[0] == null || $commandmail == null || $emailListID[0] == null){
-           $this->addFlashMessage($this->translate('tx_rhmajordomo_domain_model_emaillist.message.failedData'), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+        if ($commandmail[0] == null or !filter_var($commandmail[0], FILTER_VALIDATE_EMAIL)){
+            $this->addFlashMessage($this->translate('tx_rhmajordomo_domain_model_emaillist.message.noValidMail'), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->redirect('list');
         } else if ($emailList == null){
             $this->addFlashMessage($this->translate('tx_rhmajordomo_domain_model_emaillist.message.noListFound'), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+            $this->redirect('list');
+        } else if ($command[0] == null || $commandmail[0] == null || $emailListID[0] == null){
+           $this->addFlashMessage($this->translate('tx_rhmajordomo_domain_model_emaillist.message.failedData'), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR);
+           $this->redirect('list');
         } else {
+        
+            if($onlyFeusersEmail){
+                $commandmail[0] = $user['email'];
+                $this->unSubscripeMajordomo($command[0], $commandmail[0], $emailListID[0]);
+            } else {
+                $register = false;
+                $mailContent = 'tx_rhmajordomo_domain_model_emaillist.email.content.validate.unsubscribe';
+                if($command[0] == 'subscribe'){
+                    $register = true;
+                    $mailContent = 'tx_rhmajordomo_domain_model_emaillist.email.content.validate.subscribe';
+                }
+                $emailVerification = new EmailVerification($emailListID[0], $commandmail[0], $register);
+                $this->emailVerificationRepository->add($emailVerification);
+                $arguments = array('tx_rhmajordomo_feplugin' =>
+                                array(
+                                    'action' => "validate",
+                                    'controller' => "EmailList",
+                                    'c' => $emailVerification->getSecret(),
+                                    'm' => $commandmail[0]
+                                )
+                            );
+                $contentObj = $this->configurationManager->getContentObject();                
+                $url = $this->uriBuilder->reset()
+                        ->setTargetPageUid($contentObj->data['pid'])
+                        ->setCreateAbsoluteUri(True)
+                        ->setArguments($arguments)
+                        ->build();
+                $link = '<a href="'.$url.'" target="_blank">'.$url.'</a>';
+                
+                
+                
+                
+                $this->sendTemplateEmail(
+                        $commandmail[0], 
+                        'no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1], 
+                        $this->translate('tx_rhmajordomo_domain_model_emaillist.mail.subject.validate'),
+                        $this->translate($mailContent, array($emailList->getListName(),$link, $this->linkValidDateTime)) 
+                        );
+                $this->addFlashMessage(
+                        $this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.validMail', 
+                        array($this->linkValidDateTime)
+                        ), 
+                        '', 
+                        \TYPO3\CMS\Core\Messaging\AbstractMessage::INFO
+                        );
+                
+            }
+        }
+        $this->redirect('validate');
+        //return new ForwardResponse('validate');
+    }    
+    
+    
+    /**
+     * action list
+     * 
+     * @return void
+     */
+    public function validateAction()
+    {
+        if ($this->request->hasArgument('c') and $this->request->hasArgument('m')){
+            $secret = (string) $this->request->getArgument('c');
+            $mail = (string) $this->request->getArgument('m');
             
-            $variables = array('emailList' => $emailList, 'user' => $user);
+            $emailVerifivation = $this->emailVerificationRepository->getWithSecret($secret);
+            //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($emailVerifivation); 
+            if($emailVerifivation != Null and $emailVerifivation->isEmailValid($mail)){
+                $command = 'unsubscribe';
+                if ($emailVerifivation->getRegister()){
+                    $command = 'subscribe';
+                }
+                $this->unSubscripeMajordomo($command, $mail, $emailVerifivation->getEmaillistId());
+                $this->emailVerificationRepository->remove($emailVerifivation);
+            } else {
+                $this->addFlashMessage(
+                    $this->translate('tx_rhmajordomo_domain_model_emaillist.message.valaidate.fail'), 
+                            '', 
+                            \TYPO3\CMS\Core\Messaging\AbstractMessage::ERROR
+                            );
+            }
+        }
+    }
+    
+    /**
+     * @param array $command
+     * @param array $commandmail
+     * @param array $emailListID
+     * @return void
+     */
+    protected function unSubscripeMajordomo($command, $commandmail, $emailListID)
+    {
+        $user = $GLOBALS['TSFE']->fe_user->user;
+        $sendWelcomeMessage = (bool) ($this->settings['sendWelcomeMessage'] ?? false);
+        $onlyFeusersEmail = (bool) ($this->settings['onlyFeusersEmail'] ?? false);
+        $sendAckMessageToModerator = (bool) ($this->settings['sendAckMessageToModerator'] ?? false);
+        
+        //Get chosen Mail-List
+        $emailList = $this->emailListRepository->findByUid($emailListID);
+
+        $variables = array('emailList' => $emailList, 'user' => $user);
             
-            $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
-            
-            $mail->setFrom($emailList->getEmailModerator());
-            if($sendAckMessageToModerator){
+        $mail = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailMessage::class);
+
+        $mail->setFrom('no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1]);
+
+            if(trim($emailList->getEmailModerator()) != ""){
                 $mail->setReturnPath($emailList->getEmailModerator());
             } else {
                 //Set return Mail adress to no-replay@your-domain.com 
                 $mail->setReturnPath('no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1]);
             }
-            
+
             $mail->setTo($emailList->getMajordomoMailBox());
             
-            switch ($command[0])
+            switch ($command)
             {
                 case 'subscribe':
                 $mail->setSubject("subscribe ".$emailList->getDigestName());
-                $mail->setBody("approve ".$emailList->getApprovePasswd()." subscribe ".$emailList->getDigestName()." ".$commandmail[0]);
+                $mail->setBody()->text("approve ".$emailList->getApprovePasswd()." subscribe ".$emailList->getDigestName()." ".$commandmail);
                 
                 break;
                 case 'unsubscribe':
                 $mail->setSubject("unsubscribe from ".$emailList->getDigestName());
-                $mail->setBody("approve ".$emailList->getApprovePasswd()." unsubscribe ".$emailList->getDigestName()." ".$commandmail[0]);
+                $mail->setBody()->text("approve ".$emailList->getApprovePasswd()." unsubscribe ".$emailList->getDigestName()." ".$commandmail);
                 
                 break;
                 case 'who':
                 $mail->setSubject("member from ".$emailList->getDigestName());
-                $mail->setBody("approve ".$emailList->getApprovePasswd()." who ".$emailList->getDigestName());
+                $mail->setBody()->text("approve ".$emailList->getApprovePasswd()." who ".$emailList->getDigestName());
                 break;
                 case 'liste':
                 $mail->setSubject("list ");
-                $mail->setBody("config ".$emailList->getDigestName()." ".$emailList->getApprovePasswd());
+                $mail->setBody()->text("config ".$emailList->getDigestName()." ".$emailList->getApprovePasswd());
                     
                 break;
                 case 'newconf':
                 $mail->setSubject("newconfig ");
-                $mail->setBody("newconfig ".$emailList->getDigestName()." ".$emailList->getApprovePasswd()." \n \n $config");
+                $mail->setBody()->text("newconfig ".$emailList->getDigestName()." ".$emailList->getApprovePasswd()." \n \n $config");
                 break;
             } //switch
             //$mail->setBody('Here is the message itself');
@@ -147,26 +286,78 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
              * Or am I too stupid?
              * Alternativ the php mail()-function is here used.
              */
-            $header = 'From: '.$mail->getFrom().'' . "\r\n".'Reply-To: '.$mail->getReturnPath().'' . "\r\n" ;
-            if (mail($emailList->getMajordomoMailBox(), $mail->getSubject(), $mail->getBody() , $header)){
-           // $mail->send();
-           // if ($mail->isSent()){
-                switch ($command[0])
+            
+            #\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('tesz');
+
+            $header = 'From: '.$mail->getFrom()[0]->getAddress().'' . "\r\n".'Reply-To: '.$mail->getReturnPath()->getAddress().'' . "\r\n" ;
+            if (mail($emailList->getMajordomoMailBox(), $mail->getSubject(), $mail->getBody()->getBody(), $header)){
+            //$mail->send();
+            //if ($mail->isSent()){
+
+                switch ($command)
                 {
                     case 'subscribe':
                         if($sendWelcomeMessage){
-                            $this->sendTemplateEmail(array($commandmail[0]), array( 'no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1]), $this->translate('tx_rhmajordomo_domain_model_emaillist.mail.subject.welcome', array($emailList->getListName())), 'Welcome', $variables);
+                            $content = 'tx_rhmajordomo_domain_model_emaillist.email.content.subscribe';
+                            if($emailList->isOneWayList()){
+                                $content = 'tx_rhmajordomo_domain_model_emaillist.email.content.subscribeOneWay';
+                            }
+                            $this->sendTemplateEmail(
+                                    $commandmail, 
+                                    $mail->getFrom()[0]->getAddress(), 
+                                    $this->translate('tx_rhmajordomo_domain_model_emaillist.mail.subject.welcome',array($emailList->getListName())), 
+                                    $this->translate($content, array($emailList->getListName(),$emailList->getListEmailAddress(), $emailList->getEmailModerator())), 
+                                    $variables);
                         }
-                        $this->addFlashMessage($this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.welcome', array($emailList->getListName())), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
+                        if($sendAckMessageToModerator && trim($emailList->getEmailModerator()) != ""){
+                            $this->sendTemplateEmail(
+                                    $emailList->getEmailModerator(), 
+                                    'no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1], 
+                                    $this->translate('tx_rhmajordomo_domain_model_emaillist.mail.subject.admin',array($emailList->getListName())), 
+                                    $this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.moderator.welcome', array($commandmail, $emailList->getListName(),$emailList->getListEmailAddress(), $emailList->getEmailModerator())), 
+                                    $variables);
+                        }
+                        $this->addFlashMessage(
+                                $this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.welcome', 
+                                    array($emailList->getListName())
+                                    ), 
+                                '', 
+                                \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+                                );
                     break;
                     case 'unsubscribe':
                         if($sendWelcomeMessage){
-                            $this->sendTemplateEmail(array($commandmail[0]), array( 'no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1]), $this->translate('tx_rhmajordomo_domain_model_emaillist.mail.subject.bye', array($emailList->getListName())), 'Bye', $variables);
+                            $this->sendTemplateEmail(
+                                    $commandmail, 
+                                    $mail->getFrom()[0]->getAddress(), 
+                                    $this->translate('tx_rhmajordomo_domain_model_emaillist.mail.subject.bye', array($emailList->getListName())), 
+                                    $this->translate('tx_rhmajordomo_domain_model_emaillist.email.content.unsubscribe', array($emailList->getListName())), 
+                                    $variables
+                                    );
                         }
-                        $this->addFlashMessage($this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.bye', array($emailList->getListName())), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::OK);
+                        if($sendAckMessageToModerator && trim($emailList->getEmailModerator()) != ""){
+                            $this->sendTemplateEmail(
+                                    $emailList->getEmailModerator(), 
+                                    'no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1], 
+                                    $this->translate('tx_rhmajordomo_domain_model_emaillist.mail.subject.admin', array($emailList->getListName())), 
+                                    $this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.moderator.bye', array($commandmail, $emailList->getListName())), 
+                                    $variables
+                                    );
+                        }
+                        $this->addFlashMessage(
+                                $this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.bye', 
+                                        array($emailList->getListName())), 
+                                '', 
+                                \TYPO3\CMS\Core\Messaging\AbstractMessage::OK
+                                );
                     break;
                     default:
-                        $this->addFlashMessage($this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.default', array($emailList->getListName())), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::INFO);
+                        $this->addFlashMessage(
+                                $this->translate('tx_rhmajordomo_domain_model_emaillist.message.sendsuccessful.default', 
+                                array($emailList->getListName())), 
+                                '', 
+                                \TYPO3\CMS\Core\Messaging\AbstractMessage::INFO
+                                );
                     break;
                 } //switch
                 
@@ -175,11 +366,11 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
             }
             
             //$this->addFlashMessage($this->translate('tx_rhmajordomo_domain_model_emaillist.message.test'), '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
-        }
-        $this->redirect('list');
-                
-        
     }
+    
+    
+    
+    
     /**
      * Quelle: http://t3-developer.com/ext-programmierung/techniken-in-extensions/mail-versand-mit-fluid-templates/
      * @param type $key
@@ -198,43 +389,25 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
      * @param array $variables variables to be passed to the Fluid view
      * @return boolean TRUE on success, otherwise false
      */
-    protected function sendTemplateEmail(array $recipient, array $sender, $subject, $templateName, array $variables = array())
+    protected function sendTemplateEmail(string $recipient, string $sender, $subject, $templateName, array $variables = array())
     {
-        /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView */
-        $emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+        //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($templateName); 
+        
+        $message = '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'
+                    .'<meta name="format-detection" content="telephone=no"></head>'
+                    .'<body>'.$this->translate('tx_rhmajordomo_domain_model_emaillist.email.gredings',array('','')).'<br />'
+                    .'<br />'.$templateName.'<br />'
+                    .'<br />'.$this->translate('tx_rhmajordomo_domain_model_emaillist.email.ending').'</body></html>';
+        
+        $mail = GeneralUtility::makeInstance(MailMessage::class);
+        $mail->from(new \Symfony\Component\Mime\Address($sender, $sender));
+        $mail->to(new Address($recipient));
+        $mail->subject($subject);
+        //$mail->text('Here is the message itself');
+        $mail->html($message);
+        //$mail->attachFromPath('/path/to/my-document.pdf');
+        return $mail->send();
 
-        /*For use of Localize value */
-        $extensionName = $this->request->getControllerExtensionName();
-        $emailView->getRequest()->setControllerExtensionName($extensionName);
-        /*For use of Localize value */
-        //TODO: Why this dosen't work????
-        //$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        //$templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($extbaseFrameworkConfiguration['view']['templateRootPaths']['0']);
-        //$templatePathAndFilename = $templateRootPath .'typo3conf/ext/rh_majordomo/Resources/Private/Templates/'. 'Email/' . $templateName . '.html';
-        //$templatePathAndFilename = $templateRootPath . 'Email/' . $templateName . '.html';
-        $templatePathAndFilename = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($this->settings['templateRootPaths'].'Email/' . $templateName . '.html');
-        $emailView->setTemplatePathAndFilename($templatePathAndFilename);
-        $emailView->assignMultiple($variables);
-        $emailBody = $emailView->render();
-
-        /** @var $message \TYPO3\CMS\Core\Mail\MailMessage */
-        $message = $this->objectManager->get('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-        $message->setTo($recipient)
-                ->setFrom($sender)
-                ->setSubject($subject);
-
-        // Possible attachments here
-        //foreach ($attachments as $attachment) {
-        //    $message->attach($attachment);
-        //}
-        // Plain text example
-        //$message->setBody($emailBody, 'text/plain');
-
-        // HTML Email
-        $message->setBody($emailBody, 'text/html');
-
-        $message->send();
-        return $message->isSent();
     }
     
    

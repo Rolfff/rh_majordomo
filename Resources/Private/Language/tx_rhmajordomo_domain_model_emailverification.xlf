@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2022-12-03T17:31:53Z" product-name="rh_majordomo">
+		<header/>
+		<body>
+			<trans-unit id="emaillist_id.description">
+				<source>emaillistID</source>
+			</trans-unit>
+			<trans-unit id="email_hash.description">
+				<source>emailHash</source>
+			</trans-unit>
+			<trans-unit id="secret.description">
+				<source>secret</source>
+			</trans-unit>
+			<trans-unit id="register.description">
+				<source>toRegister</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

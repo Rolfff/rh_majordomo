@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2020-01-20T17:31:53Z" product-name="rh_majordomo">
+	<file source-language="en" datatype="plaintext" original="messages" date="2022-12-03T17:31:53Z" product-name="rh_majordomo">
 		<header/>
 		<body>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist">
@@ -32,6 +32,22 @@
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.sender">
 				<source>Sender</source>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.is_one_way_list">
+				<source>Only moderators can send emails.</source>
+			</trans-unit>
+                        
+                        <trans-unit id="tx_rhmajordomo_domain_model_emailverification.emaillist_id">
+				<source>Emaillist ID</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emailverification.email_hash">
+				<source>E-Mail Hash</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emailverification.secret">
+				<source>Secret</source>
+			</trans-unit>
+			<trans-unit id="tx_rhmajordomo_domain_model_emailverification.register">
+				<source>toRegister</source>
 			</trans-unit>
 		</body>
 	</file>
