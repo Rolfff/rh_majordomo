@@ -4,13 +4,17 @@
 		<header/>
 		<body>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.datetimeformat">
-                            <!--see https://www.php.net/manual/en/datetime.format.php -->
+            <!--see https://www.php.net/manual/en/datetime.format.php -->
 				<source>Y-m-d H:i</source>
-                                <target>d.m.Y H:i</target>
+               <target>d.m.Y H:i</target>
 			</trans-unit>
-                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist">
+            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.error.nolistfound">
+				<source>No email list found. Please add mail lists in FE plugin.</source>
+                <target>Keine E-Mail-Liste gefunden. Bitte fügen Sie Mail-Listen im FE-Plugin hinzu.</target>
+			</trans-unit>
+            <trans-unit id="tx_rhmajordomo_domain_model_emaillist">
 				<source>Email List</source>
-                                <target>Email Liste</target>
+                <target>Email Liste</target>
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.digest_name">
 				<source>Digest Name</source>

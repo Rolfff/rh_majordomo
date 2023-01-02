@@ -7,7 +7,8 @@
         <f:comment><f:debug title="My Title">{settings}</f:debug>
         <f:debug title="My Title">{feuser}</f:debug></f:comment>
                 
-                
+        <f:if condition="{emailLists}">
+        <f:then>
          <f:if condition="{settings.onlyFeusersEmail} == 0 || {settings.onlyFeusersEmail} == 1 && {feuser}">
             <f:then>
                 
@@ -72,7 +73,11 @@
     </f:else>
 </f:if>
 
-
+        </f:then>
+        <f:else>
+<f:translate key="tx_rhmajordomo_domain_model_emaillist.error.nolistfound" />
+    </f:else>
+</f:if>
 
 
 

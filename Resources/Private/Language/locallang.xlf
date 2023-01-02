@@ -3,11 +3,14 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2020-01-20T17:31:53Z" product-name="rh_majordomo">
             <header/>
 		<body>
-                    <trans-unit id="tx_rhmajordomo_domain_model_emaillist.datetimeformat">
-                            <!--see https://www.php.net/manual/en/datetime.format.php -->
+            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.datetimeformat">
+            <!--see https://www.php.net/manual/en/datetime.format.php -->
 				<source>Y-m-d H:i:s</source>
                     </trans-unit>
-                    <trans-unit id="tx_rhmajordomo_domain_model_emaillist">
+            <trans-unit id="tx_rhmajordomo_domain_model_emaillist.error.nolistfound">
+				<source>No email list found. Please add mail lists in FE plugin.</source>
+			</trans-unit>
+           <trans-unit id="tx_rhmajordomo_domain_model_emaillist">
 				<source>Email List</source>
                     </trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.digest_name">
