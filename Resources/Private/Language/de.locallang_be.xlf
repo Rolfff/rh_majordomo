@@ -8,7 +8,7 @@
             </trans-unit>
             <trans-unit id="settings.multibleRecords">
                 <source>Select one or multiple maillists</source>
-                <target>Wähle eine oder mehrere Email-Listen aus</target>
+                <target>Wählen Sie eine oder mehrere Email-Listen aus</target>
             </trans-unit>
             <trans-unit id="settings.sendWelcomeMessage">
                 <source>Sends greeting and farewell message</source>
@@ -18,9 +18,9 @@
                 <source>Allow only the Email-Address from FE-User</source>
                 <target>Erlaubt ausschließlich das hinzufügen der eigenen E-mail-Adresse aus dem FE-User-Datensatz</target>
             </trans-unit>
-            <trans-unit id="settings.sendAckMessageToModerator">
-                <source>Sends notification to moderator</source>
-                <target>Sendet Benachrichtigung an Moderator</target>
+            <trans-unit id="settings.debugMode">
+                <source>Sends majordomo replay to moderator-mail or server-admin-mail</source>
+                <target>Sendet majordomo Antwort an Moderator-E-mail oder Serveradmin-E-mail</target>
             </trans-unit>
 
         </body>

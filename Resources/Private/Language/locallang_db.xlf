@@ -25,16 +25,19 @@
 				<source>Majordomo Mail Box</source>
 			</trans-unit>
 			<trans-unit id="tx_rh_majordomo_feplugin.name">
-				<source>Majordomo FrontendPlugin</source>
+				<source>Majordomo Frontend Plugin</source>
 			</trans-unit>
 			<trans-unit id="tx_rh_majordomo_feplugin.description">
-				<source></source>
+				<source>Include un-/subscribe to e-mail lists module.</source>
 			</trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.sender">
 				<source>Sender</source>
 			</trans-unit>
                         <trans-unit id="tx_rhmajordomo_domain_model_emaillist.is_one_way_list">
 				<source>Only moderators can send emails.</source>
+			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.send_ack_message_to_moderator">
+				<source>Send notification to moderator.</source>
 			</trans-unit>
                         
                         <trans-unit id="tx_rhmajordomo_domain_model_emailverification.emaillist_id">

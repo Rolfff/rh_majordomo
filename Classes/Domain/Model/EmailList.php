@@ -45,6 +45,13 @@ class EmailList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $emailModerator = '';
+    
+    /**
+     * sendAckMessageToModerator
+     * 
+     * @var bool
+     */
+    protected $sendAckMessageToModerator = '';
 
     /**
      * approvePasswd
@@ -215,6 +222,7 @@ class EmailList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->isOneWayList;
     }
+    
     /**
      * Returns the isOneWayList
      * 
@@ -223,5 +231,36 @@ class EmailList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function isOneWayList()
     {
         return $this->isOneWayList;
+    }
+    
+    /**
+     * Sets the sendAckMessageToModerator
+     * 
+     * @param bool $sendAckMessageToModerator
+     * @return void
+     */
+    public function setSendAckMessageToModerator($sendAckMessageToModerator)
+    {
+        $this->sendAckMessageToModerator = $sendAckMessageToModerator;
+    }
+
+    /**
+     * Returns the sendAckMessageToModerator
+     * 
+     * @return bool $sendAckMessageToModerator
+     */
+    public function getSendAckMessageToModerator()
+    {
+        return $this->sendAckMessageToModerator;
+    }
+    
+    /**
+     * Returns the sendAckMessageToModerator
+     * 
+     * @return bool $sendAckMessageToModerator
+     */
+    public function sendAckMessageToModerator()
+    {
+        return $this->sendAckMessageToModerator;
     }
 }
