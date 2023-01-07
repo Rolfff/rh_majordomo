@@ -14,8 +14,8 @@
             <trans-unit id="settings.onlyFeusersEmail">
                 <source>Allow only the Email-Address from FE-User</source>
             </trans-unit>
-            <trans-unit id="settings.sendAckMessageToModerator">
-                <source>Sends notification to moderator</source>
+            <trans-unit id="settings.debugMode">
+                <source>Sends majordomo replay to moderator-mail or server-admin-mail</source>
             </trans-unit>
             
             
