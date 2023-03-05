@@ -19,7 +19,7 @@ defined('TYPO3') or die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'rhmajordomo',
-    'feplugin',
+    'Feplugin',
     'LLL:EXT:rh_majordomo/Resources/Private/Language/locallang_db.xlf:tx_rh_majordomo_feplugin.name',
     'emailverifivationicon'
 );

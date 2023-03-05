@@ -5,7 +5,7 @@ defined('TYPO3_MODE') || die('Access denied.');
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
    'RhMajordomo',
-   'feplugin',
+   'Feplugin',
    [\RH\RhMajordomo\Controller\EmailListController::class => 'list,post,validate'],
    // non-cacheable actions
    [\RH\RhMajordomo\Controller\EmailListController::class => 'list,post,validate'],

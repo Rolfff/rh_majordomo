@@ -1,6 +1,6 @@
 mod.wizards.newContentElement.wizardItems.plugins {
 	elements {
-		rhmajordomo {
+		rhmajordomo_feplugin {
 			iconIdentifier = emailverifivationicon
 			title = LLL:EXT:rh_majordomo/Resources/Private/Language/locallang_db.xlf:tx_rh_majordomo_feplugin.name
 			description = LLL:EXT:rh_majordomo/Resources/Private/Language/locallang_db.xlf:tx_rh_majordomo_feplugin.name
@@ -10,4 +10,5 @@ mod.wizards.newContentElement.wizardItems.plugins {
 			}
 		}
 	}
+        show := addToList(rhmajordomo_feplugin)
 }
