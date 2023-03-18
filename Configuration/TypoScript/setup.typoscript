@@ -1,11 +1,11 @@
 
 plugin.tx_rhmajordomo {
     view {
-        templateRootPaths.0 = EXT:{extension.shortExtensionKey}/Resources/Private/Templates/
+        templateRootPaths.0 = EXT:rh_majordomo/Resources/Private/Templates/
         templateRootPaths.10 = {$plugin.tx_rhmajordomo_feplugin.view.templateRootPath}
         partialRootPaths.0 = EXT:rh_majordomo/Resources/Private/Partials/
         partialRootPaths.10 = {$plugin.tx_rhmajordomo_feplugin.view.partialRootPath}
-        layoutRootPaths.0 = EXT:tx_rhmajordomo/Resources/Private/Layouts/
+        layoutRootPaths.0 = EXT:rh_majordomo/Resources/Private/Layouts/
         layoutRootPaths.10 = {$plugin.tx_rhmajordomo_feplugin.view.layoutRootPath}
     }
     settings{
@@ -27,7 +27,7 @@ plugin.tx_rhmajordomo {
         #callDefaultActionIfActionCantBeResolved = 1
     }
 }
-
+#tt_content.list.20.rhmajordomo_feplugin < tt_content.tx_rhmajordomo
 
 # these classes are only used in auto-generated templates
 plugin.tx_rhmajordomo._CSS_DEFAULT_STYLE (
