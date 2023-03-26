@@ -110,4 +110,10 @@
 		<f:link.action action="new">New EmailList</f:link.action>
                 </f:comment>
 	</f:section>
+        <f:section name="renderPlugin">
+
+            {rhmajordomo:data.contentListOptions(listType: listType)}
+            <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
+
+         </f:section>
 </html>
