@@ -1,15 +1,15 @@
 <?php
 defined('TYPO3_MODE') || die('Access denied.');
 
-
+use Rh\RhMajordomo\Controller\EmailListController;
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
    'RhMajordomo',
    'Feplugin',
-   [\RH\RhMajordomo\Controller\EmailListController::class => 'list,post,validate'],
+   [EmailListController::class => 'list,post,validate'],
    // non-cacheable actions
-   [\RH\RhMajordomo\Controller\EmailListController::class => 'list,post,validate'],
-   \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
+   [EmailListController::class => 'list,post,validate'],
+   \TYPO3\CMS\Extbase\Utility\ExtensionUtility::PLUGIN_TYPE_PLUGIN
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('

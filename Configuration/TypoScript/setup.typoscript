@@ -27,7 +27,7 @@ plugin.tx_rhmajordomo {
         #callDefaultActionIfActionCantBeResolved = 1
     }
 }
-#tt_content.list.20.rhmajordomo_feplugin < tt_content.tx_rhmajordomo
+#tt_content.list.20.rhmajordomo_feplugin.templateRootPaths < plugin.tx_rhmajordomo.view.templateRootPaths
 
 # these classes are only used in auto-generated templates
 plugin.tx_rhmajordomo._CSS_DEFAULT_STYLE (
