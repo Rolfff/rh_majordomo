@@ -6,6 +6,7 @@ CREATE TABLE tx_rhmajordomo_domain_model_emaillist (
 	digest_name varchar(255) DEFAULT '' NOT NULL,
 	list_name varchar(255) DEFAULT '' NOT NULL,
 	list_email_address varchar(255) DEFAULT '' NOT NULL,
+        send_ack_message_to_moderator tinyint(4) unsigned DEFAULT 0 NOT NULL,
 	email_moderator varchar(255) DEFAULT '' NOT NULL,
 	approve_passwd varchar(255) DEFAULT '' NOT NULL,
 	majordomo_mail_box varchar(255) DEFAULT '' NOT NULL,

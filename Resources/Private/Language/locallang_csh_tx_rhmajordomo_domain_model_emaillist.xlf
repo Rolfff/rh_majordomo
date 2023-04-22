@@ -15,6 +15,9 @@
 			<trans-unit id="email_moderator.description">
 				<source>emailModerator</source>
 			</trans-unit>
+                        <trans-unit id="send_ack_message_to_moderator.description">
+				<source>sendAckMessageToModerator</source>
+			</trans-unit>
 			<trans-unit id="approve_passwd.description">
 				<source>approvePasswd</source>
 			</trans-unit>

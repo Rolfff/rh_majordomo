@@ -86,8 +86,6 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                 ));
     }
     
-    
-    
 
     /**
      * action list
@@ -162,9 +160,7 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                         ->build();
                 $link = '<a href="'.$url.'" target="_blank">'.$url.'</a>';
                 
-                
-                
-                
+
                 $this->sendTemplateEmail(
                         $commandmail[0], 
                         'no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1], 
@@ -227,7 +223,7 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
         $user = $GLOBALS['TSFE']->fe_user->user;
         $sendWelcomeMessage = (bool) ($this->settings['sendWelcomeMessage'] ?? false);
         $onlyFeusersEmail = (bool) ($this->settings['onlyFeusersEmail'] ?? false);
-        $sendAckMessageToModerator = (bool) ($this->settings['sendAckMessageToModerator'] ?? false);
+        $debugMode = (bool) ($this->settings['debugMode'] ?? false);
         
         //Get chosen Mail-List
         $emailList = $this->emailListRepository->findByUid($emailListID);
@@ -238,7 +234,7 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
 
         $mail->setFrom('no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1]);
 
-            if(trim($emailList->getEmailModerator()) != ""){
+            if(trim($emailList->getEmailModerator()) != "" && $debugMode ){
                 $mail->setReturnPath($emailList->getEmailModerator());
             } else {
                 //Set return Mail adress to no-replay@your-domain.com 
@@ -309,7 +305,7 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                                     $this->translate($content, array($emailList->getListName(),$emailList->getListEmailAddress(), $emailList->getEmailModerator())), 
                                     $variables);
                         }
-                        if($sendAckMessageToModerator && trim($emailList->getEmailModerator()) != ""){
+                        if($emailList->sendAckMessageToModerator() && trim($emailList->getEmailModerator()) != ""){
                             $this->sendTemplateEmail(
                                     $emailList->getEmailModerator(), 
                                     'no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1], 
@@ -335,7 +331,7 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
                                     $variables
                                     );
                         }
-                        if($sendAckMessageToModerator && trim($emailList->getEmailModerator()) != ""){
+                        if($emailList->sendAckMessageToModerator() && trim($emailList->getEmailModerator()) != ""){
                             $this->sendTemplateEmail(
                                     $emailList->getEmailModerator(), 
                                     'no-reply@'.explode("@",$_SERVER['SERVER_ADMIN'])[1], 
