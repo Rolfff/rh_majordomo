@@ -108,12 +108,12 @@ class EmailListController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionContro
     /**
      * action post
      * 
-     * @param array $command
-     * @param array $commandmail
-     * @param array $emailListID
+     * @param array|null $command
+     * @param array|null $commandmail
+     * @param array|null $emailListID
      * @return void
      */
-    public function postAction($command = null, $commandmail = null, $emailListID = null)
+    public function postAction(array $command = null, array $commandmail = null, array $emailListID = null)
     {
         $user = $GLOBALS['TSFE']->fe_user->user;
         $sendWelcomeMessage = (bool) ($this->settings['sendWelcomeMessage'] ?? false);
