@@ -8,6 +8,9 @@
             <trans-unit id="settings.multibleRecords">
                 <source>Select one or multiple maillists</source>
             </trans-unit>
+            <trans-unit id="settings.displayListOfMailLists">
+                <source>Displays list of email lists and their descriptions</source>
+            </trans-unit>
             <trans-unit id="settings.sendWelcomeMessage">
                 <source>Sends greeting and farewell message</source>
             </trans-unit>

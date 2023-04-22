@@ -29,7 +29,16 @@
                         </TCEforms>
                     </settings.multibleRecords>
 
-
+                    <settings.displayListOfMailLists>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>LLL:EXT:rh_majordomo/Resources/Private/Language/locallang_be.xlf:settings.displayListOfMailLists</label>
+                            <config>
+                                <type>check</type>
+                                <default>1</default>
+                            </config>
+                        </TCEforms>
+                    </settings.displayListOfMailLists>
 
                     <settings.sendWelcomeMessage>
                         <TCEforms>

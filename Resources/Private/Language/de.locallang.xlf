@@ -12,6 +12,10 @@
                     <source>No email list found. Please add mail lists in FE plugin.</source>
                     <target>Keine E-Mail-Liste gefunden. Bitte fügen Sie Mail-Listen im FE-Plugin hinzu.</target>
 		</trans-unit>
+                <trans-unit id="tx_rhmajordomo_domain_model_emaillist.lists.header">
+                    <source>Available mail lists:</source>
+                    <target>Verfügbare E-Mail-Liste:</target>
+                </trans-unit>
                 <trans-unit id="tx_rhmajordomo_domain_model_emaillist">
                     <source>Email List</source>
                     <target>Email Liste</target>
@@ -20,9 +24,25 @@
                     <source>Digest Name</source>
                     <target>Digest Name</target>
 		</trans-unit>
+                <trans-unit id="tx_rhmajordomo_domain_model_emaillist.isOneWayList">
+                    <source>List Type</source>
+                    <target>Art</target>
+		</trans-unit>
+                <trans-unit id="tx_rhmajordomo_domain_model_emaillist.isOneWayList.yes">
+                    <source>Newsletter</source>
+                    <target>Newsletter</target>
+                </trans-unit>
+                <trans-unit id="tx_rhmajordomo_domain_model_emaillist.isOneWayList.no">
+                    <source>Mail list</source>
+                    <target>Verteiler</target>
+		</trans-unit>
 		<trans-unit id="tx_rhmajordomo_domain_model_emaillist.list_name">
                     <source>List Name</source>
                     <target>List Name</target>
+		</trans-unit>
+		<trans-unit id="tx_rhmajordomo_domain_model_emaillist.description">
+                    <source>List Description</source>
+                    <target>List Beschreibung</target>
 		</trans-unit>
 		<trans-unit id="tx_rhmajordomo_domain_model_emaillist.sender">
                     <source>Sender</source>

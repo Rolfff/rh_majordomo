@@ -13,12 +13,27 @@
            <trans-unit id="tx_rhmajordomo_domain_model_emaillist">
 				<source>Email List</source>
                     </trans-unit>
+                    <trans-unit id="tx_rhmajordomo_domain_model_emaillist.lists.header">
+                        <source>Available mail lists:</source>
+                    </trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.digest_name">
 				<source>Digest Name</source>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.isOneWayList">
+                                <source>List Type</source>
+                        </trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.isOneWayList.yes">
+                            <source>Newsletter</source>
+                        </trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.isOneWayList.no">
+                                <source>Mail list</source>
+                        </trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.list_name">
 				<source>List Name</source>
 			</trans-unit>
+                        <trans-unit id="tx_rhmajordomo_domain_model_emaillist.description">
+                            <source>List Description</source>
+                        </trans-unit>
 			<trans-unit id="tx_rhmajordomo_domain_model_emaillist.list_email_address">
 				<source>List Email Address</source>
 			</trans-unit>

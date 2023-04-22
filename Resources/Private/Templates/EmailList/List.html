@@ -12,6 +12,37 @@
          <f:if condition="{settings.onlyFeusersEmail} == 0 || {settings.onlyFeusersEmail} == 1 && {feuser}">
             <f:then>
                 
+                <f:if condition="{settings.displayListOfMailLists} == 1">
+                    <f:then>
+                        <f:translate key="tx_rhmajordomo_domain_model_emaillist.lists.header" />
+                        <table  class="tx_rhmajordomo" >
+			<tr>
+				
+				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.list_name" /></th>
+				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.description" /></th>
+                                <th><f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList" /></th>
+			</tr>
+
+			<f:for each="{emailLists}" as="emailList">
+				<tr>
+					<td> {emailList.listName}</td>
+					<td> <f:format.html>{emailList.description}</f:format.html></td>
+                                        <td> 
+                                            <f:if condition="{emailList.isOneWayList} == 1">
+                                            <f:then>
+                                                <f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList.yes" />
+                                            </f:then>
+                                            <f:else>
+                                                <f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList.no" />
+                                            </f:else>
+                                            </f:if>
+                                        </td>
+				</tr>
+			</f:for>
+                        </table>
+                        <br />
+                    </f:then>
+                </f:if>
                 <f:form method="post" controller="EmailList" action="post">
                     <f:if condition="{settings.onlyFeusersEmail}">
                         <f:then>
@@ -62,11 +93,6 @@
                          
                         <f:form.submit value="{f:translate(key: 'tx_rhmajordomo_domain_model_emaillist.button.submit')}" />
                 </f:form>
-                
-                
-
-
-
     </f:then>
     <f:else>
         <f:translate key="tx_rhmajordomo_domain_model_emaillist.message.notloggedin"/>
@@ -90,6 +116,7 @@
 				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.sender" /></th>
 				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.email_moderator" /></th>
 				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.approve_passwd" /></th>
+                                <th><f:translate key="tx_rhmajordomo_domain_model_emaillist.description" /></th>
 				<th> </th>
 				<th> </th>
 			</tr>
@@ -101,6 +128,7 @@
 					<td><f:link.action action="show" arguments="{emailList : emailList}"> {emailList.sender}</f:link.action></td>
 					<td><f:link.action action="show" arguments="{emailList : emailList}"> {emailList.emailModerator}</f:link.action></td>
 					<td><f:link.action action="show" arguments="{emailList : emailList}"> {emailList.approvePasswd}</f:link.action></td>
+                                        <td><f:link.action action="show" arguments="{emailList : emailList}"> {emailList.description}</f:link.action></td>
 					<td><f:link.action action="edit" arguments="{emailList : emailList}">Edit</f:link.action></td>
 					<td><f:link.action action="delete" arguments="{emailList : emailList}">Delete</f:link.action></td>
 				</tr>
