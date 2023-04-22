@@ -12,7 +12,7 @@
          <f:if condition="{settings.onlyFeusersEmail} == 0 || {settings.onlyFeusersEmail} == 1 && {feuser}">
             <f:then>
                 
-                <f:form method="post" action="post">
+                <f:form method="post" controller="EmailList" action="post">
                     <f:if condition="{settings.onlyFeusersEmail}">
                         <f:then>
                             <f:translate key="tx_rhmajordomo_domain_model_emaillist.intro.feusermail" arguments="{0: '{feuser.email}'}" /><br />
@@ -110,4 +110,10 @@
 		<f:link.action action="new">New EmailList</f:link.action>
                 </f:comment>
 	</f:section>
+        <f:section name="renderPlugin">
+
+            {Rh\RhMajordomo:data.contentListOptions(listType: listType)}
+            <f:cObject typoscriptObjectPath="tt_content.list" data="{contentObjectData}" table="tt_content"/>
+
+         </f:section>
 </html>

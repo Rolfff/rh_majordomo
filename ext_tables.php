@@ -4,12 +4,12 @@ defined('TYPO3_MODE') || die('Access denied.');
 call_user_func(
     function()
     {
-
+        /*Warum ist die Regestrierung hier?
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
             'Rh.RhMajordomo',
             'Feplugin',
             'Majordomo FrontendPlugin'
-        );
+        );*/
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('rh_majordomo', 'Configuration/TypoScript', 'Majordomo Plugin');
 
