@@ -10,14 +10,16 @@ Then you should create the Frontend-Plugin and choose one 'Email List'. That is 
 
 ### Layout
 - Copy the templateRootPath files to use your own layout and style.
-- Override the templateRootPath in your template constants..
-`plugin.tx_rhmajordomo_feplugin.view.templateRootPath = EXT:rh_majordomo/Resources/Private/Templates/`
+- Override the templateRootPath in your template constants.
+   - `plugin.tx_rhmajordomo_feplugin.view.templateRootPath = EXT:rh_majordomo/Resources/Private/Templates/`
 - Edit the template files as you like.
 
 ### Composer
 Install via Composer
- `composer require rh/rh-majordomo`
- `./vendor/bin/typo3 extension:activate rh_majordomo`
+
+`composer require rh/rh-majordomo`
+
+`./vendor/bin/typo3 extension:activate rh_majordomo`
 
 ## Collaboration
 Please feel free to help me with the maintenance and development. I am thankful for any cooperation. 
