@@ -1,17 +1,55 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    
 	<f:layout name="Default" />
+        <f:section name="HeaderAssets">
+            <link rel="stylesheet" type="text/css" href="{f:uri.resource(path: 'Css/styles.css')}"/>
+        </f:section>
 	<f:section name="content">
-		
-
-		<f:flashMessages />
-        <f:comment><f:debug title="My Title">{settings}</f:debug>
-        <f:debug title="My Title">{feuser}</f:debug></f:comment>
-                
+        
+	<f:flashMessages />
+        <f:comment>
+            <f:debug title="My Title">{settings}</f:debug>
+        <f:debug title="My Title">{feuser}</f:debug>
+        </f:comment>
+        
         <f:if condition="{emailLists}">
         <f:then>
          <f:if condition="{settings.onlyFeusersEmail} == 0 || {settings.onlyFeusersEmail} == 1 && {feuser}">
             <f:then>
                 
+                <f:if condition="{settings.displayListOfMailLists} == 1">
+                    <f:then>
+                        <f:translate key="tx_rhmajordomo_domain_model_emaillist.lists.header" />
+                        <f:for each="{emailLists}" as="emailList">
+                            <div class="tx-rh-majordomo-wrapper">
+                                <div class="box tx-rh-majordomo-listname">
+                                    <b><f:translate key="tx_rhmajordomo_domain_model_emaillist.list_name" />:</b> {emailList.listName}
+                                </div>
+
+                                <div class="box tx-rh-majordomo-description">
+                                    <b><f:translate key="tx_rhmajordomo_domain_model_emaillist.description" />:</b> 
+                                    <f:format.html>{emailList.description}</f:format.html>
+                                </div>
+                                
+                                <div class="box tx-rh-majordomo-type">
+                                    <b><f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList" />:</b> 
+                                    <f:if condition="{emailList.isOneWayList} == 1">
+                                        <f:then>
+                                            <f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList.yes" />
+                                        </f:then>
+                                        <f:else>
+                                            <f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList.no" />
+                                        </f:else>
+                                    </f:if>
+
+                                </div>
+                            </div>
+                        </f:for>
+                        
+                       
+                        <br />
+                    </f:then>
+                </f:if>
                 <f:form method="post" controller="EmailList" action="post">
                     <f:if condition="{settings.onlyFeusersEmail}">
                         <f:then>
@@ -62,11 +100,6 @@
                          
                         <f:form.submit value="{f:translate(key: 'tx_rhmajordomo_domain_model_emaillist.button.submit')}" />
                 </f:form>
-                
-                
-
-
-
     </f:then>
     <f:else>
         <f:translate key="tx_rhmajordomo_domain_model_emaillist.message.notloggedin"/>
@@ -90,6 +123,7 @@
 				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.sender" /></th>
 				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.email_moderator" /></th>
 				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.approve_passwd" /></th>
+                                <th><f:translate key="tx_rhmajordomo_domain_model_emaillist.description" /></th>
 				<th> </th>
 				<th> </th>
 			</tr>
@@ -101,6 +135,7 @@
 					<td><f:link.action action="show" arguments="{emailList : emailList}"> {emailList.sender}</f:link.action></td>
 					<td><f:link.action action="show" arguments="{emailList : emailList}"> {emailList.emailModerator}</f:link.action></td>
 					<td><f:link.action action="show" arguments="{emailList : emailList}"> {emailList.approvePasswd}</f:link.action></td>
+                                        <td><f:link.action action="show" arguments="{emailList : emailList}"> {emailList.description}</f:link.action></td>
 					<td><f:link.action action="edit" arguments="{emailList : emailList}">Edit</f:link.action></td>
 					<td><f:link.action action="delete" arguments="{emailList : emailList}">Delete</f:link.action></td>
 				</tr>

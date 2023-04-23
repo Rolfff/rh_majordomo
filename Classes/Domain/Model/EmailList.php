@@ -31,6 +31,13 @@ class EmailList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $listName = '';
+    
+    /**
+     * description
+     * 
+     * @var string
+     */
+    protected $description = '';
 
     /**
      * listEmailAddress
@@ -262,5 +269,26 @@ class EmailList extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function sendAckMessageToModerator()
     {
         return $this->sendAckMessageToModerator;
+    }
+    
+    /**
+     * Returns the description
+     * 
+     * @return string description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Sets the description
+     * 
+     * @param string $description
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }

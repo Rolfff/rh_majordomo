@@ -16,14 +16,14 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'digest_name,list_name,list_email_address,email_moderator,approve_passwd,majordomo_mail_box',
+        'searchFields' => 'digest_name,description,list_name,list_email_address,email_moderator,approve_passwd,majordomo_mail_box',
         'iconfile' => 'EXT:rh_majordomo/Resources/Public/Icons/tx_rhmajordomo_domain_model_emaillist.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, digest_name, list_name, list_email_address, email_moderator, send_ack_message_to_moderator, approve_passwd, majordomo_mail_box, is_one_way_list',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, digest_name, list_name, description, list_email_address, email_moderator, send_ack_message_to_moderator, approve_passwd, majordomo_mail_box, is_one_way_list',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, digest_name, list_name, list_email_address, email_moderator, send_ack_message_to_moderator, approve_passwd, majordomo_mail_box, is_one_way_list, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, digest_name, list_name, description, list_email_address, email_moderator, send_ack_message_to_moderator, approve_passwd, majordomo_mail_box, is_one_way_list, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -132,6 +132,16 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
+            ],
+        ],
+        'description' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:rh_majordomo/Resources/Private/Language/locallang_db.xlf:tx_rhmajordomo_domain_model_emaillist.description',
+            'config' => [
+                'type' => 'text',
+                'size' => 30,
+                'enableRichtext' => true,
+                'eval' => 'trim'
             ],
         ],
         'list_email_address' => [

@@ -1,0 +1,32 @@
+/* grid layout, 3 columns */
+.tx-rh-majordomo-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* 1 fraction */ 
+    margin-bottom: 0.1em;
+}
+
+.tx-rh-majordomo-wrapper .box {
+    background-color: whitesmoke;
+    margin: 0.1em;
+    padding: 0.2em;
+}
+
+.tx-rh-majordomo-listname{
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+}
+
+.tx-rh-majordomo-type{
+    background-color: red;
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+}
+
+.tx-rh-majordomo-description{
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+}
+
+.tx-rh-majordomo {
+    background-color: none;
+}

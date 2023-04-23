@@ -10,6 +10,10 @@
                 <source>Select one or multiple maillists</source>
                 <target>Wählen Sie eine oder mehrere Email-Listen aus</target>
             </trans-unit>
+            <trans-unit id="settings.displayListOfMailLists">
+                <source>Displays list of email lists and their descriptions</source>
+                <target>Zeigt liste mit Emailverteilern und deren Beschreibungen an</target>
+            </trans-unit>
             <trans-unit id="settings.sendWelcomeMessage">
                 <source>Sends greeting and farewell message</source>
                 <target>Senden begrüßungs und verabschiedungs Email</target>

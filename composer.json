@@ -27,7 +27,9 @@
         }
     },
     "support": {
-      "issues": "https://github.com/Rolfff/rh_majordomo/issues"
+      "issues": "https://github.com/Rolfff/rh_majordomo/issues",
+      "source": "https://github.com/Rolfff/rh_majordomo",
+      "docs": "https://github.com/Rolfff/rh_majordomo/blob/master/README.md"
    },
     "replace": {
         "rh/rh-majordomo": "self.version",
