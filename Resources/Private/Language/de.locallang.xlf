@@ -25,7 +25,7 @@
                     <target>Digest Name</target>
 		</trans-unit>
                 <trans-unit id="tx_rhmajordomo_domain_model_emaillist.isOneWayList">
-                    <source>List Type</source>
+                    <source>Type</source>
                     <target>Art</target>
 		</trans-unit>
                 <trans-unit id="tx_rhmajordomo_domain_model_emaillist.isOneWayList.yes">
@@ -37,12 +37,12 @@
                     <target>Verteiler</target>
 		</trans-unit>
 		<trans-unit id="tx_rhmajordomo_domain_model_emaillist.list_name">
-                    <source>List Name</source>
-                    <target>List Name</target>
+                    <source>Name</source>
+                    <target>Name</target>
 		</trans-unit>
 		<trans-unit id="tx_rhmajordomo_domain_model_emaillist.description">
-                    <source>List Description</source>
-                    <target>List Beschreibung</target>
+                    <source>Description</source>
+                    <target>Beschreibung</target>
 		</trans-unit>
 		<trans-unit id="tx_rhmajordomo_domain_model_emaillist.sender">
                     <source>Sender</source>

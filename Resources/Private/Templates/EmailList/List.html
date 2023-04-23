@@ -1,12 +1,17 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+    
 	<f:layout name="Default" />
+        <f:section name="HeaderAssets">
+            <link rel="stylesheet" type="text/css" href="{f:uri.resource(path: 'Css/styles.css')}"/>
+        </f:section>
 	<f:section name="content">
-		
-
-		<f:flashMessages />
-        <f:comment><f:debug title="My Title">{settings}</f:debug>
-        <f:debug title="My Title">{feuser}</f:debug></f:comment>
-                
+        
+	<f:flashMessages />
+        <f:comment>
+            <f:debug title="My Title">{settings}</f:debug>
+        <f:debug title="My Title">{feuser}</f:debug>
+        </f:comment>
+        
         <f:if condition="{emailLists}">
         <f:then>
          <f:if condition="{settings.onlyFeusersEmail} == 0 || {settings.onlyFeusersEmail} == 1 && {feuser}">
@@ -15,31 +20,33 @@
                 <f:if condition="{settings.displayListOfMailLists} == 1">
                     <f:then>
                         <f:translate key="tx_rhmajordomo_domain_model_emaillist.lists.header" />
-                        <table  class="tx_rhmajordomo" >
-			<tr>
-				
-				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.list_name" /></th>
-				<th><f:translate key="tx_rhmajordomo_domain_model_emaillist.description" /></th>
-                                <th><f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList" /></th>
-			</tr>
+                        <f:for each="{emailLists}" as="emailList">
+                            <div class="tx-rh-majordomo-wrapper">
+                                <div class="box tx-rh-majordomo-listname">
+                                    <b><f:translate key="tx_rhmajordomo_domain_model_emaillist.list_name" />:</b> {emailList.listName}
+                                </div>
 
-			<f:for each="{emailLists}" as="emailList">
-				<tr>
-					<td> {emailList.listName}</td>
-					<td> <f:format.html>{emailList.description}</f:format.html></td>
-                                        <td> 
-                                            <f:if condition="{emailList.isOneWayList} == 1">
-                                            <f:then>
-                                                <f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList.yes" />
-                                            </f:then>
-                                            <f:else>
-                                                <f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList.no" />
-                                            </f:else>
-                                            </f:if>
-                                        </td>
-				</tr>
-			</f:for>
-                        </table>
+                                <div class="box tx-rh-majordomo-description">
+                                    <b><f:translate key="tx_rhmajordomo_domain_model_emaillist.description" />:</b> 
+                                    <f:format.html>{emailList.description}</f:format.html>
+                                </div>
+                                
+                                <div class="box tx-rh-majordomo-type">
+                                    <b><f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList" />:</b> 
+                                    <f:if condition="{emailList.isOneWayList} == 1">
+                                        <f:then>
+                                            <f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList.yes" />
+                                        </f:then>
+                                        <f:else>
+                                            <f:translate key="tx_rhmajordomo_domain_model_emaillist.isOneWayList.no" />
+                                        </f:else>
+                                    </f:if>
+
+                                </div>
+                            </div>
+                        </f:for>
+                        
+                       
                         <br />
                     </f:then>
                 </f:if>
